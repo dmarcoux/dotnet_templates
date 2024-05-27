@@ -3,7 +3,7 @@
 Templates for common files/configs in [.NET](https://dotnet.microsoft.com/)
 projects. Here's what's included:
 
-- _nix-shell for .NET_
+- _.NET Development Environment with nix-shell_
 
   Reproducible development environment for .NET projects which relies on
   [Nix](https://github.com/NixOS/nix), a purely functional and cross-platform
