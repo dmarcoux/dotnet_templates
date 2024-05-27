@@ -24,10 +24,10 @@ projects. Here's what's included:
   gh repo create NEW_REPOSITORY_NAME --template=dmarcoux/dotnet_templates --clone --private/--public
   ```
 
-2. Search for `CHANGEME` in the newly created repository to adapt it to your
-   needs.
+2. Search for `CHANGEME` in the newly created repository to adapt it to the
+   project's needs.
 
-3. I use the [JetBrains Rider](https://www.jetbrains.com/rider/) IDE, launch it
+3. Launch IDE, in this case [JetBrains Rider](https://www.jetbrains.com/rider/),
    within the nix-shell environment with:
 
    ```bash
