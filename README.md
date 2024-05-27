@@ -34,7 +34,11 @@ projects. Here's what's included:
    nix-shell --run 'nohup rider &'
    ```
 
-4. Start development environment with `nix-shell --pure`.
+4. Start development environment with only the packages from the nix-shell:
+
+   ```bash
+   nix-shell --pure
+   ```
 
 5. Generate `.gitignore` from `dotnet new` and append the content of [.gitignore](./.gitignore):
 
