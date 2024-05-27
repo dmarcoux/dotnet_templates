@@ -46,6 +46,8 @@ projects. Here's what's included:
    dotnet new gitignore && cat .gitignore.template >> .gitignore && rm .gitignore.template
    ```
 
+   _Note: By generating `.gitignore`, we don't have to keep track of the changes in the `dotnew new gitignore` template._
+
 6. Generate `.editorconfig` to follow the default .NET code style:
 
    ```bash
