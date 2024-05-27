@@ -27,12 +27,19 @@ projects. Here's what's included:
 2. Search for `CHANGEME` in the newly created repository to adapt it to your
    needs.
 
-3. Start development environment with `nix-shell --pure`.
+3. I use the [JetBrains Rider](https://www.jetbrains.com/rider/) IDE, launch it
+   within the nix-shell environment with:
 
-4. Generate `.gitignore` from `dotnet new` and append the content of [.gitignore](./.gitignore):
+   ```bash
+   nix-shell --run 'nohup rider &'
+   ```
+
+4. Start development environment with `nix-shell --pure`.
+
+5. Generate `.gitignore` from `dotnet new` and append the content of [.gitignore](./.gitignore):
 
    ```bash
    dotnet new gitignore && cat .gitignore.template >> .gitignore && rm .gitignore.template
    ```
 
-5. Adapt this README to the project.
+6. Adapt this README to the project.
