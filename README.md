@@ -46,4 +46,12 @@ projects. Here's what's included:
    dotnet new gitignore && cat .gitignore.template >> .gitignore && rm .gitignore.template
    ```
 
-6. Adapt this README to the project.
+6. Generate `.editorconfig` to follow the default .NET code style:
+
+   ```bash
+   dotnet new editorconfig
+   ```
+
+   _Note: By generating `.editorconfig`, we don't have to keep track of the changes in the `dotnew new editorconfig` template._
+
+7. Adapt this README to the project.
