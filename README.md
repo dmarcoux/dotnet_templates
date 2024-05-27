@@ -1,7 +1,13 @@
 # <a href="https://github.com/dmarcoux/dotnet_templates">dmarcoux/dotnet_templates</a>
 
 Templates for common files/configs in [.NET](https://dotnet.microsoft.com/)
-projects.
+projects. Here's what's included:
+
+- _nix-shell for .NET_
+
+  Reproducible development environment for .NET projects which relies on
+  [Nix](https://github.com/NixOS/nix), a purely functional and cross-platform
+  package manager.
 
 ## How to Use This Template
 
@@ -12,20 +18,21 @@ projects.
 
   *OR*
 
-- With [GitHub's CLI](https://github.com/cli/cli), run `gh repo create
-  NEW_REPOSITORY_NAME --template=dmarcoux/dotnet_templates`.
+- With [GitHub's CLI](https://github.com/cli/cli), run:
+
+  ```bash
+  gh repo create NEW_REPOSITORY_NAME --template=dmarcoux/dotnet_templates --clone --private/--public
+  ```
 
 2. Search for `CHANGEME` in the newly created repository to adapt it to your
    needs.
 
-## nix-shell for .NET
+3. Start development environment with `nix-shell --pure`.
 
-Reproducible development environment for .NET projects which relies on
-[Nix](https://github.com/NixOS/nix), a purely functional and cross-platform
-package manager.
+4. Generate `.gitignore` from `dotnet new` and append the content of [.gitignore](./.gitignore):
 
-### Usage
+   ```bash
+   dotnet new gitignore && cat .gitignore.template >> .gitignore && rm .gitignore.template
+   ```
 
-1. Copy [shell.nix](./shell.nix) at the root of your .NET project.
-2. Add the content of [.gitignore](./.gitignore) to your own _.gitignore_.
-3. Start with `nix-shell --pure`.
+5. Adapt this README to the project.
