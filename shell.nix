@@ -8,7 +8,11 @@ with (import (fetchTarball https://github.com/NixOS/nixpkgs/archive/a5e4bbcb4780
 
 let
   # Define variables for packages which are referenced more than once in this nix-shell
-  dotnet_sdk = dotnetCorePackages.sdk_8_0;
+  dotnet_sdk = (with dotnetCorePackages; combinePackages [
+    # Install all the .NET versions needed here...
+    sdk_8_0
+    # sdk_7_0
+  ]);
 in
   mkShell {
     name = "dotnet-env";
