@@ -3,8 +3,8 @@
 # https://nixos.wiki/wiki/DotNET
 
 # To ensure this nix-shell is reproducible, we pin the packages index to a commit SHA taken from a channel on https://status.nixos.org/
-# This commit is from NixOS 23.11
-with (import (fetchTarball https://github.com/NixOS/nixpkgs/archive/a5e4bbcb4780c63c79c87d29ea409abf097de3f7.tar.gz) { config.allowUnfree = true; });
+# This commit is from NixOS 24.05 (28-06-2024)
+with (import (fetchTarball https://github.com/NixOS/nixpkgs/archive/89c49874fb15f4124bf71ca5f42a04f2ee5825fd.tar.gz) { config.allowUnfree = true; });
 
 let
   # Define variables for packages which are referenced more than once in this nix-shell
