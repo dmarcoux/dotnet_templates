@@ -56,4 +56,12 @@ projects. Here's what's included:
 
    _Note: By generating `.editorconfig`, we don't have to keep track of the changes in the `dotnew new editorconfig` template._
 
-7. Adapt this README to the project.
+7. Generate  `global.json` to enforce a specific .NET SDK version with .NET CLI commands and continuous integration.
+
+   ```bash
+   dotnet new globaljson --roll-forward disable && sed -i -e '1s|^|// Documentation: https://learn.microsoft.com/en-us/dotnet/core/tools/global-json\n// Comments are supported in this JSON file. Refer to the documentation above\n|' global.json
+   ```
+
+   _Note: By generating `global.json`, we don't have to manually enter the version number of the .NET SDK installed in the nix-shell environment._
+
+8. Adapt this README to the project.
