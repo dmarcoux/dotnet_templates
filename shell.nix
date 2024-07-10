@@ -20,6 +20,8 @@ in
     packages = [
       # .NET SDK
       dotnet_sdk
+      # Run PowerShell scripts, which are sometimes included in NuGet packages like Playwright
+      powershell
       # Timezones
       tzdata
       # Locales
