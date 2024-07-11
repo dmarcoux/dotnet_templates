@@ -13,6 +13,8 @@ let
     sdk_8_0
     # sdk_7_0
   ]);
+  # Browsers for Playwright, version 1.40
+  playwright-browsers = playwright-driver.browsers;
 in
   mkShell {
     name = "dotnet-env";
@@ -26,6 +28,8 @@ in
       tzdata
       # Locales
       glibcLocales
+      # Browsers for Playwright
+      playwright-browsers
     ];
 
     shellHook = ''
@@ -44,6 +48,12 @@ in
 
       # Put dotnet tools in $PATH to be able to use them
       export PATH="$DOTNET_CLI_HOME/.dotnet/tools:$PATH"
+
+      # Ensure Playwright finds the browsers installed in this nix-shell
+      # TODO: Be sure the Playwright browsers match the version of Playwright installed in .NET projects (Some inspiration... https://github.com/QwikDev/qwik/blob/05a52c3f0978edb8cdf999bbc59ffca025ab9c61/flake.nix#L55-L59)
+      export PLAYWRIGHT_BROWSERS_PATH=${playwright-browsers}
+      export PLAYWRIGHT_NODEJS_PATH="${pkgs.nodejs}/bin/node"
+      export PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS=true
     '';
 
     # Without this, there are warnings about LANG, LC_ALL and locales.
