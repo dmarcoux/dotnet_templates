@@ -21,6 +21,13 @@
     ]);
   in
   {
+    # Script to generate global.json after updating .NET SDKs
+    packages.${system}.generateGlobalJson = pkgs.writeScriptBin "generateGlobalJson" ''
+      rm --force global.json &&
+        ${dotnet_sdk}/bin/dotnet new globaljson --roll-forward disable &&
+        sed -i -e '1s|^|// Documentation: https://learn.microsoft.com/en-us/dotnet/core/tools/global-json\n// Comments are supported in this JSON file. Refer to the documentation above\n|' global.json
+    '';
+
     # Create development shell based on the Filesystem Hierarchy Standard (FHS) with a set of
     # standard packages based on the list maintained by the appimagetools package
     #
