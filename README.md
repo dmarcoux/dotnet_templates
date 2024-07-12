@@ -1,7 +1,10 @@
 # <a href="https://github.com/dmarcoux/dotnet_templates">dmarcoux/dotnet_templates</a>
 
 Templates for common files/configs in [.NET](https://dotnet.microsoft.com/)
-projects.
+projects. The continuous integration is
+[disabled](https://docs.github.com/en/actions/using-workflows/disabling-and-enabling-a-workflow)
+in this template repository since there is no solution, thus avoiding
+unnecessary runs.
 
 ## How to Use This Template
 
@@ -80,3 +83,10 @@ the root of this repository.
   ```bash
   nix run .#generateGlobalJson
   ```
+
+## Continuous Integration with GitHub Actions
+
+The [continuous integration](./.github/workflows/continuous_integration.yml)
+builds the solution with code analyzers (set in
+[Directory.Build.props](./Directory.Build.props)) and run tests to ensure the
+codebase stays in a workable state while upholding code quality standards.

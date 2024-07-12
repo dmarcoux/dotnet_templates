@@ -1,0 +1,32 @@
+name: .NET - Continuous integration
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  dotnet_continuous_integration:
+    # Pinning to a specific Ubuntu version to have reproducible builds (at least, more than with ubuntu-latest)
+    runs-on: ubuntu-24.04
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4.1.7
+
+    - name: Setup .NET with the version defined in global.json
+      uses: actions/setup-dotnet@v4.0.1
+      with:
+        # Cache NuGet packages, calculating their hash from `packages.lock.json` as part of the cache key
+        cache: true
+        cache-dependency-path: 'src/**/packages.lock.json'
+
+    - name: Restore dependencies of the solution
+      run: dotnet restore --locked-mode # --locked-mode prevents updating `packages.lock.json`
+
+    - name: Build the solution
+      run: dotnet build --no-restore
+
+    - name: Run tests for the solution
+      run: dotnet test --no-build --verbosity normal
