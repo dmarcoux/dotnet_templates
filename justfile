@@ -34,6 +34,8 @@ ci: restore format build test
 run project=("." / "") *options='':
   dotnet run --project "{{project}}" {{options}}
 
+# TODO: Simplify this by not having to regenerate global.json whenever .NET SDK is updated.
+#       This should be possible just like in `pinJustVersionCI` below. The README could also be simplified to tell to run this new recipe.
 [doc("Generate global.json after manually changing the .NET SDK package in `flake.nix` or updating `flake.lock`")]
 generateGlobalJson:
   # The .NET SDKs have been updated when manually changing the packages in `flake.nix` or by recreating `flake.lock` to update
