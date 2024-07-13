@@ -3,7 +3,9 @@
   # https://en.wikipedia.org/wiki/Filesystem_Hierarchy_Standard
 
   inputs = {
+    # Use https://www.nixhub.io/ to easily find the exact commit to use in order to pin an input (and its packages) to a specific version
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    nixpkgs_just.url = "github:nixos/nixpkgs/ab82a9612aa45284d4adf69ee81871a389669a9e";
     # TODO: Look into https://github.com/numtide/flake-utils to see if it would be useful
   };
 
@@ -19,6 +21,9 @@
       # sdk_7_0
       # sdk_6_0
     ]);
+
+    # https://github.com/casey/just
+    just = inputs.nixpkgs_just.legacyPackages.${system}.pkgs.just;
   in
   {
     # Script to generate global.json after updating .NET SDKs
@@ -47,6 +52,8 @@
             tzdata
             # Locales
             glibcLocales
+            # Command runner
+            just
           ];
           # Commands to be executed in the development shell
           profile = ''

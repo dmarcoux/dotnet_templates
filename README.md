@@ -43,7 +43,7 @@ unnecessary runs.
 6. Generate  `global.json` to enforce a specific .NET SDK version with .NET CLI commands and continuous integration.
 
    ```bash
-   nix run .#generateGlobalJson
+   just generateGlobalJson
    ```
 
    _Note: By generating `global.json`, we don't have to manually enter the version number of the .NET SDK installed in the development environment._
@@ -56,33 +56,27 @@ Reproducible development environment for .NET projects which relies on
 [Nix](https://github.com/NixOS/nix) [Flakes](https://nixos.wiki/wiki/Flakes),
 a purely functional and cross-platform package manager.
 
-Start development environment:
+**Start development environment:**
 
 ```bash
 nix develop
 ```
 
-Once inside the development environment, launch [JetBrains Rider](https://www.jetbrains.com/rider/)
-or another IDE:
+**Once inside the development environment...**
+
+_...launch [JetBrains Rider](https://www.jetbrains.com/rider/) or another IDE:_
 
 ```bash
 nohup rider &
 ```
 
-### Scripts
+_...or perhaps execute any of the [just](https://github.com/casey/just)
+recipes/commands included in the [justfile](./justfile):_
 
-A few scripts are included in the development environment. They can be run at
-the root of this repository.
-
-- Generate [global.json](./global.json)
-
-  The .NET SDKs have been updated if when manually changing the packages in
-  [flake.nix](./flake.nix) or by recreating [flake.lock](./flake.lock) to update
-  the revision of every input to its current revision with `nix flake update`.
-
-  ```bash
-  nix run .#generateGlobalJson
-  ```
+```bash
+# List all available just recipes
+just
+```
 
 ## Continuous Integration with GitHub Actions
 

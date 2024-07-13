@@ -22,14 +22,19 @@ jobs:
         cache: true
         cache-dependency-path: 'src/**/packages.lock.json'
 
-    - name: Restore dependencies of the solution
-      run: dotnet restore --locked-mode # --locked-mode prevents updating `packages.lock.json`
+    - name: Install just, a command runner # just is used in the next steps
+      uses: extractions/setup-just@v2
+      with:
+        just-version: 1.29.1
+
+    - name: Restore dependencies of the solution without updating `packages.lock.json`
+      run: just restore
 
     - name: Verify that all code of the solution is correctly formatted
-      run: dotnet format --no-restore --verify-no-changes
+      run: just format
 
-    - name: Build the solution
-      run: dotnet build --no-restore
+    - name: Build the solution without restoring its dependencies
+      run: just build
 
-    - name: Run tests for the solution
-      run: dotnet test --no-build --verbosity normal
+    - name: Run tests for the solution without building it
+      run: just test
