@@ -88,5 +88,6 @@ the root of this repository.
 
 The [continuous integration](./.github/workflows/continuous_integration.yml)
 builds the solution with code analyzers (set in
-[Directory.Build.props](./Directory.Build.props)) and runs tests to ensure the
-codebase stays in a workable state while upholding code quality standards.
+[Directory.Build.props](./Directory.Build.props)), verifies that all code is
+correctly formatted and runs tests to ensure the codebase stays in a workable
+state while upholding code quality standards.
