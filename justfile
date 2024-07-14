@@ -10,6 +10,13 @@
 default:
   just --list --unsorted
 
+[doc("Launch IDE, but allow its process to live even if the development environment gets killed")]
+code ide="rider":
+  nohup {{ide}} &
+  @# The shell seems to be stuck after the execution of the previous command with `nohup`. Pressing `Enter` shows the
+  @# shell prompt back, but we don't need to do anything anyway, so we can simply get the shell prompt back with `exit`
+  @exit
+
 [doc("Restore dependencies of the solution without updating `packages.lock.json`")]
 restore:
   dotnet restore --locked-mode

@@ -67,10 +67,13 @@ nix develop
 _...launch [JetBrains Rider](https://www.jetbrains.com/rider/) or another IDE:_
 
 ```bash
-nohup rider &
+# Launch JetBrains Rider
+just code
+# Launch Visual Studio Code
+just code code
 ```
 
-_...or perhaps execute any of the [just](https://github.com/casey/just)
+_...or perhaps execute any of the other [just](https://github.com/casey/just)
 recipes/commands included in the [justfile](./justfile):_
 
 ```bash
