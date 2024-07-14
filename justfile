@@ -34,6 +34,11 @@ ci: restore format build test
 run project=("." / "") *options='':
   dotnet run --project "{{project}}" {{options}}
 
+# TODO: This is updating `flake.lock`, but the dependent recipes don't have any effect since they are still running with the inputs from before the update...
+[doc("Update revision of every input to its current revision in `flake.lock`")]
+updateFlakes: && generateGlobalJson pinJustVersionCI # With `&&`, run dependent recipes after
+  nix flake update
+
 # TODO: Simplify this by not having to regenerate global.json whenever .NET SDK is updated.
 #       This should be possible just like in `pinJustVersionCI` below. The README could also be simplified to tell to run this new recipe.
 [doc("Generate global.json after manually changing the .NET SDK package in `flake.nix` or updating `flake.lock`")]
