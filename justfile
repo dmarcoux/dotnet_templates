@@ -50,9 +50,9 @@ updateFlakes: && generateGlobalJson pinJustVersionCI # With `&&`, run dependent 
 #       This should be possible just like in `pinJustVersionCI` below. The README could also be simplified to tell to run this new recipe.
 [doc("Generate global.json after manually changing the .NET SDK package in `flake.nix` or updating `flake.lock`")]
 generateGlobalJson:
-  # The .NET SDKs have been updated when manually changing the packages in `flake.nix` or by recreating `flake.lock` to update
-  # the revision of every input to its current revision with `nix flake update`.
-  #
+  @# The .NET SDKs have been updated when manually changing the packages in `flake.nix` or by recreating `flake.lock` to update
+  @# the revision of every input to its current revision with `nix flake update`.
+  @#
   # Without removing global.json, the dotnet CLI won't execute commands due to a mismatch in the .NET SDK version. So global.json has to be removed first.
   rm --force global.json
   dotnet new globaljson --roll-forward disable
