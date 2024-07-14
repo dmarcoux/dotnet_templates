@@ -5,6 +5,8 @@
   inputs = {
     # Use https://www.nixhub.io/ to easily find the exact commit to use in order to pin an input (and its packages) to a specific version
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    # TODO: Wait for a fix regarding this issue https://github.com/jetify-com/devbox/issues/2191
+    # nixpgs_dotnet_sdk = ""
     nixpkgs_just.url = "github:nixos/nixpkgs/ab82a9612aa45284d4adf69ee81871a389669a9e";
     # TODO: Look into https://github.com/numtide/flake-utils to see if it would be useful
   };
