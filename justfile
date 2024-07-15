@@ -64,3 +64,13 @@ just_version := replace(`just --version`, 'just ', '')
 [doc("Pin the just version in the continuous integration")]
 pinJustVersionCI:
   sed -i -E 's|(^\s*just-version: )(.*)|\1{{just_version}}|g' .github/workflows/continuous_integration.yml
+
+[doc("Manage JSON Web Tokens in development with dotnet user-jwts")]
+[no-cd] # Run in the directory where the just recipe is called
+jwts command *options="":
+  dotnet user-jwts {{command}} {{options}}
+
+[doc("Manage secrets in development with dotnet user-secrets")]
+[no-cd] # Run in the directory where the just recipe is called
+secrets command *options="":
+  dotnet user-secrets {{command}} {{options}}
