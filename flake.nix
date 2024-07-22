@@ -22,6 +22,9 @@
 
     # https://github.com/casey/just
     just = inputs.nixpkgs_just.legacyPackages.${system}.pkgs.just;
+
+    # Bundle of SSL certificates
+    cacert = pkgs.cacert;
   in
   {
     # Create development shell based on the Filesystem Hierarchy Standard (FHS) with a set of
@@ -43,6 +46,8 @@
             tzdata
             # Locales
             glibcLocales
+            # Bundle of SSL certificates
+            cacert
             # Command runner
             just
           ];
@@ -68,6 +73,9 @@
             # Many tests fail due those warnings showing up in test outputs too...
             # This solution is from: https://gist.github.com/aabs/fba5cd1a8038fb84a46909250d34a5c1
             export LOCALE_ARCHIVE="${pkgs.glibcLocales}/lib/locale/locale-archive"
+
+            # For the bundle of SSL certificates to be used in applications (like curl and others...)
+            export SSL_CERT_FILE=${cacert}/etc/ssl/certs/ca-bundle.crt
           '';
         })).env;
   };
