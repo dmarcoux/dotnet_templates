@@ -14,7 +14,7 @@
   outputs = { nixpkgs, ... } @ inputs:
   let
     system = "x86_64-linux";
-    pkgs = nixpkgs.legacyPackages.${system};
+    pkgs = import nixpkgs { system = "${system}"; config.allowUnfree = true; };
 
     # .NET SDK
     # Installing multiple SDKs (if needed somehow...) with `dotnetCorePackages.combinePackages` breaks JetBrains Rider - https://youtrack.jetbrains.com/issue/RIDER-85715/Rider-no-longer-automatically-loads-Dotnet-from-a-Nix-Flake-dev-shell-environment
