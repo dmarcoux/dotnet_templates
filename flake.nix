@@ -16,13 +16,9 @@
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
 
-    # .NET SDKs
-    dotnet_sdk = (with pkgs.dotnetCorePackages; combinePackages [
-      # Install all the .NET SDK versions needed here...
-      sdk_8_0
-      # sdk_7_0
-      # sdk_6_0
-    ]);
+    # .NET SDK
+    # Installing multiple SDKs (if needed somehow...) with `dotnetCorePackages.combinePackages` breaks JetBrains Rider - https://youtrack.jetbrains.com/issue/RIDER-85715/Rider-no-longer-automatically-loads-Dotnet-from-a-Nix-Flake-dev-shell-environment
+    dotnet_sdk = pkgs.dotnetCorePackages.sdk_8_0;
 
     # https://github.com/casey/just
     just = inputs.nixpkgs_just.legacyPackages.${system}.pkgs.just;
