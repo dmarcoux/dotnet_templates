@@ -4,8 +4,6 @@
 #   https://github.com/casey/just?tab=readme-ov-file#recipe-parameters
 #   https://github.com/casey/just?tab=readme-ov-file#selecting-recipes-to-run-with-an-interactive-chooser
 
-# TODO: Create recipes to update the revision of every input (nix flake update)
-
 # Default recipe will list all just recipes in the order they appear in this justfile
 default:
   just --list --unsorted
