@@ -24,7 +24,13 @@ unnecessary runs.
 2. Search for `CHANGEME` in the newly created repository to adapt it to the
    project's needs.
 
-3. Generate `.gitignore` from `dotnet new` and append the content of [.gitignore](./.gitignore):
+3. Start the development environment to run the commands from the next steps:
+
+   ```bash
+   nix develop
+   ```
+
+4. Generate `.gitignore` from `dotnet new` and append the content of [.gitignore](./.gitignore):
 
    ```bash
    dotnet new gitignore && cat .gitignore.template >> .gitignore && rm .gitignore.template
