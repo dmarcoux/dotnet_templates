@@ -1,0 +1,81 @@
+[tools]
+dotnet = "10.0.103"
+
+# Documentation for tasks: https://mise.jdx.dev/tasks/
+[tasks.code]
+description = "Open the project in your IDE or text editor, by default JetBrains Rider"
+run = [
+  # With `nohup`, your IDE / text editor process continues to live even if the shell gets killed
+  # `&` puts the process in the background to not block the shell
+  "nohup {{arg(name='editor',default='rider')}} ./ &",
+  # The shell seems to be stuck after the execution of the previous command with `nohup`. Pressing `Enter` shows the
+  # shell prompt back, but we don't need to do anything anyway, so we can simply get the shell prompt back with `exit`
+  "exit",
+]
+alias = "c"
+
+[tasks.format]
+description = "Format code to match EditorConfig settings"
+run = "dotnet format"
+alias = "f"
+
+[tasks.restore]
+description = "Restore dependencies of the solution without updating `packages.lock.json`"
+run = "dotnet restore --locked-mode"
+
+[tasks.format-check]
+description = "Verify that all code of the solution is correctly formatted"
+run = "dotnet format --no-restore --verify-no-changes"
+
+[tasks.build]
+description = "Build the solution without restoring its dependencies"
+run = "dotnet build --no-restore"
+
+[tasks.test]
+description = "Run tests for the solution without building it"
+run = "dotnet test --no-build --verbosity normal"
+
+[tasks.ci]
+description = "Run the same tasks as in the continuous integration, and in the same order"
+depends = ["restore", "format-check", "build", "test"]
+
+[tasks.run]
+description = "Run the specified project (defaults to the current directory if there is only one project)"
+usage = '''
+arg "<project>" help="Project to run" default="."
+arg "<options>..." help="Additional options" default=""
+'''
+# Run in the directory where this Mise task is called
+dir = "{{cwd}}"
+run = "dotnet run --project ${usage_project?} ${usage_options?}"
+
+# TODO: This could be automatically handled by Renovate when .NET is updated
+[tasks.generateGlobalJson]
+description = "Generate global.json after updating `dotnet` in `mise.toml`"
+run = [
+  # Without removing global.json, the dotnet CLI won't execute commands due to a mismatch in the .NET SDK version. So global.json has to be removed first.
+  "rm --force global.json",
+  "dotnet new globaljson --roll-forward disable",
+  # Mention documentation in comments at the top of global.json
+  "sed -i -e '1s|^|// Documentation: https://learn.microsoft.com/en-us/dotnet/core/tools/global-json\\n// Comments are supported in this JSON file. Refer to the documentation above\\n|' global.json"
+]
+
+[tasks.jwts]
+description = "Manage JSON Web Tokens in development with dotnet user-jwts"
+usage = '''
+arg "<command>" help="Command to run"
+arg "<options>..." help="Additional options" default=""
+'''
+# Run in the directory where this Mise task is called
+dir = "{{cwd}}"
+run = "dotnet user-jwts ${usage_command?} ${usage_options?}"
+
+[tasks.secrets]
+description = "Manage secrets in development with dotnet user-secrets"
+usage = '''
+arg "<command>" help="Command to run"
+arg "<options>..." help="Additional options" default=""
+'''
+# Run in the directory where this Mise task is called
+dir = "{{cwd}}"
+run = "dotnet user-secrets ${usage_command?} ${usage_options?}"

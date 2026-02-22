@@ -24,16 +24,16 @@ unnecessary runs.
 2. Search for `CHANGEME` in the newly created repository to adapt it to the
    project's needs.
 
-3. Start the development environment to run the commands from the next steps:
+3. Install tools to run the commands from the next steps:
 
    ```bash
-   nix develop
+   mise install
    ```
 
-4. Generate `.gitignore` from `dotnet new` and append the content of [.gitignore](./.gitignore):
+4. Generate `.gitignore` from `dotnet new`:
 
    ```bash
-   dotnet new gitignore && cat .gitignore.template >> .gitignore && rm .gitignore.template
+   dotnet new gitignore
    ```
 
    _Note: By generating `.gitignore`, we don't have to keep track of the changes in the `dotnew new gitignore` template._
@@ -49,42 +49,31 @@ unnecessary runs.
 6. Generate  `global.json` to enforce a specific .NET SDK version with .NET CLI commands and continuous integration.
 
    ```bash
-   just generateGlobalJson
+   mise run generateGlobalJson
    ```
 
    _Note: By generating `global.json`, we don't have to manually enter the version number of the .NET SDK installed in the development environment._
 
 7. Adapt this README to the project. This complete section can be deleted...
 
-## .NET Development Environment with Nix Flakes
+# Development Environment
 
-Reproducible development environment for .NET projects which relies on
-[Nix](https://github.com/NixOS/nix) [Flakes](https://nixos.wiki/wiki/Flakes),
-a purely functional and cross-platform package manager.
+Rely on [Mise](https://mise.jdx.dev/) to install tools, set environment
+variables, and run tasks. Refer to [mise.toml](mise.toml) for details. The Mise
+documentation is there to help you get started, there's no need to repeat it all
+here. It boils down to activating Mise (_optional_), installing tools, and
+running tasks.
 
-**Start development environment:**
+Install tools with:
 
 ```bash
-nix develop
+mise install
 ```
 
-**Once inside the development environment...**
-
-_...launch [JetBrains Rider](https://www.jetbrains.com/rider/) or another IDE:_
+See available tasks with:
 
 ```bash
-# Launch JetBrains Rider
-just code
-# Launch Visual Studio Code
-just code code
-```
-
-_...or perhaps execute any of the other [just](https://github.com/casey/just)
-recipes/commands included in the [justfile](./justfile):_
-
-```bash
-# List all available just recipes
-just
+mise run
 ```
 
 ## Continuous Integration with GitHub Actions

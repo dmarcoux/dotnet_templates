@@ -22,19 +22,19 @@ jobs:
         cache: true
         cache-dependency-path: 'src/**/packages.lock.json'
 
-    - name: Install just, a command runner # just is used in the next steps
-      uses: extractions/setup-just@v2
+    - name: Install Mise
+      uses: jdx/mise-action@v3.6.1
       with:
-        just-version: 1.29.1
+        install: false # Only need Mise to run its tasks
 
     - name: Restore dependencies of the solution without updating `packages.lock.json`
-      run: just restore
+      run: mise run restore
 
     - name: Verify that all code of the solution is correctly formatted
-      run: just format
+      run: mise run format
 
     - name: Build the solution without restoring its dependencies
-      run: just build
+      run: mise run build
 
     - name: Run tests for the solution without building it
-      run: just test
+      run: mise run test
